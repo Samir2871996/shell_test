@@ -7,6 +7,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 
 extern char **environ;
 char *PrometInput(void);
@@ -14,6 +15,11 @@ char **TokArray(char *line);
 char *_strdup(char *li);
 void free_array(char **array);
 int fork_and_excute(char **command, char **argv);
-
+int _strcmp(char *string1, char *string2);
+char *_strcat(char *string1, char *string2);
+char *_strcpy(char *dest, char *src);
+int _strlen(char *s);
+char *get_envi_var(char *var);
+char *get_my_full_path(char *command);
 #endif
 
