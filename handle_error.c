@@ -13,7 +13,10 @@ void rev_string(char *s)
 	int i;
 
 	while (s[counter] != '\0')
-	counter++;
+	{
+		counter++;
+	}
+			
 	for (i = 0; i < counter; i++)
 	{
 		counter--;
@@ -22,3 +25,29 @@ void rev_string(char *s)
 		s[counter] = rev;
 	}
 }
+
+char *num_to_string(int number)
+{
+	char buffer[30];
+	int i = 0;
+
+	if (number == 0)
+	{
+		buffer[i++] = '0';
+	}
+	else 
+	{
+		while (number > 0)
+		{
+			buffer[i++] = (number % 10) + '0';
+			number = number / 10 ;
+		}
+	}
+
+	buffer[i] = '\0';
+	rev_string(buffer);
+	return (_strdup(buffer));
+}
+
+
+

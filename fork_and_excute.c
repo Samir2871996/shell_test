@@ -8,32 +8,37 @@
  * Return: status
 */
 
-int fork_and_excute(char **command, char **argv)
+int fork_and_excute(char **command, char **argv, int index)
 {
 pid_t child;
 int statues;
+char *the_full_command;
+
+the_full_command = get_my_full_path(command[0]);
+if (!the_full_command)
+{
+    print_the_sh_error(argv[0], command[0], index);
+    free_array(command);
+    return(127);
+}
 
 child = fork();
 
 if (child == 0)
 {
-if (execve(command[0], command, environ) == -1)
+if (execve(the_full_command, command, environ) == -1)
 {
-perror(argv[0]);
 free_array(command);
-exit(127);
+free(the_full_command);
 }
 }
 else
 {
-free_array(command);
 waitpid(child, &statues, 0);
-
+free_array(command);
+free(the_full_command);
 }
-
 return (WEXITSTATUS(statues));
-
-
 }
 
 

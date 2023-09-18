@@ -1,11 +1,13 @@
 #include "shell.h"
 
-int main(int argc, char **argv)
+int main (int argc, char **argv)
 {
+    int index = 0;
     char *line = NULL;
     char ** command = NULL;
     int status = 0;
     (void) argc;
+    
 
     while (1)
     {
@@ -19,6 +21,7 @@ int main(int argc, char **argv)
             free (line);
             return (status);
         }
+        index++;
 
         command = TokArray(line);
         if (!command)
@@ -26,7 +29,7 @@ int main(int argc, char **argv)
             continue;
         }
 
-        status = fork_and_excute(command, argv);
+        status = fork_and_excute(command, argv, index);
 
 
          
